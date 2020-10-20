@@ -18,6 +18,24 @@ pub(crate) fn main() {
     };
     bpost.summarize();
     bpost.def_func();
+    let a = String::from("hello");
+    {
+        let b = String::from("byeeee");
+        let result = longest(&a, &b);
+        println!("{}", result);
+    }
+    let dao = Dao {
+        name: &String::from("db"),
+    };
+    println!("{}", dao.fun());
+}
+
+fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
+    if a.len() > b.len() {
+        a
+    } else {
+        b
+    }
 }
 
 pub fn largest(list: &[i32]) -> i32 {
@@ -66,4 +84,14 @@ impl Summarizable for BlogPost {
     }
 
     fn fun() {}
+}
+
+struct Dao<'a> {
+    name: &'a String,
+}
+
+impl<'a> Dao<'a> {
+    fn fun(&self) -> &String {
+        self.name
+    }
 }
