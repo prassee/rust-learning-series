@@ -28,6 +28,24 @@ pub(crate) fn main() {
         name: &String::from("db"),
     };
     println!("{}", dao.fun());
+
+    parse_context(&Context(&String::from("echo")));
+}
+
+struct Context<'a>(&'a str);
+
+struct Parser<'a, 'c> {
+    ctx: &'a Context<'c>,
+}
+
+impl<'a, 'c> Parser<'a, 'c> {
+    fn echo(&self) -> &'c str {
+        self.ctx.0
+    }
+}
+
+fn parse_context<'a>(cntx: &Context<'a>) -> &'a str {
+    Parser { ctx: cntx }.echo()
 }
 
 fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
