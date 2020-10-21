@@ -1,3 +1,9 @@
+mod csvreader;
+mod genlifetime;
+
+use csvreader::CsvReader;
+use genlifetime::*;
+
 pub(crate) fn main() {
     let scores = vec![100, 189, 210, 209, 176];
     let wins = vec![4, 3, 2, 1];
@@ -12,7 +18,6 @@ pub(crate) fn main() {
     println!("{:?} {:?}", ipoint, fpoint);
     println!("{:?} {:?}", ipoint.get_x(), fpoint.get_x());
     let bpost = BlogPost {
-        body: String::from("body"),
         heading: String::from("heading"),
         date: String::from("10th"),
     };
@@ -24,35 +29,13 @@ pub(crate) fn main() {
         let result = longest(&a, &b);
         println!("{}", result);
     }
-    let dao = Dao {
-        name: &String::from("db"),
-    };
-    println!("{}", dao.fun());
 
-    parse_context(&Context(&String::from("echo")));
-}
+    parse_context(&genlifetime::Context(&String::from("echo")));
 
-struct Context<'a>(&'a str);
-
-struct Parser<'a, 'c> {
-    ctx: &'a Context<'c>,
-}
-
-impl<'a, 'c> Parser<'a, 'c> {
-    fn echo(&self) -> &'c str {
-        self.ctx.0
-    }
-}
-
-fn parse_context<'a>(cntx: &Context<'a>) -> &'a str {
-    Parser { ctx: cntx }.echo()
-}
-
-fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
-    if a.len() > b.len() {
-        a
-    } else {
-        b
+    let csv_reader = CsvReader::new(String::from(""));
+    println!("{:?}", csv_reader);
+    for x in csv_reader {
+        println!("{:?}", x);
     }
 }
 
@@ -93,7 +76,6 @@ trait Summarizable {
 struct BlogPost {
     date: String,
     heading: String,
-    body: String,
 }
 
 impl Summarizable for BlogPost {
@@ -104,12 +86,3 @@ impl Summarizable for BlogPost {
     fn fun() {}
 }
 
-struct Dao<'a> {
-    name: &'a String,
-}
-
-impl<'a> Dao<'a> {
-    fn fun(&self) -> &String {
-        self.name
-    }
-}
