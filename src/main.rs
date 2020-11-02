@@ -1,9 +1,12 @@
 mod csvreader;
 mod genlifetime;
+mod iterate_lifetime;
 
 use csvreader::CsvReader;
 use genlifetime::*;
+use iterate_lifetime::*;
 
+// main entry point
 pub(crate) fn main() {
     let scores = vec![100, 189, 210, 209, 176];
     let wins = vec![4, 3, 2, 1];
@@ -37,6 +40,8 @@ pub(crate) fn main() {
     for x in csv_reader {
         println!("{:?}", x);
     }
+
+    do_iterate();
 }
 
 pub fn largest(list: &[i32]) -> i32 {
@@ -80,9 +85,9 @@ struct BlogPost {
 
 impl Summarizable for BlogPost {
     fn summarize(&self) -> String {
+        println!("{}", "data");
         format!("Blog Post - {:?}  posted on {:?}", self.heading, self.date)
     }
 
     fn fun() {}
 }
-
