@@ -23,3 +23,24 @@ impl Iterator for CsvReader {
         Some(String::from(""))
     }
 }
+
+// the below code is with multiple lifetime params
+
+#[derive(Debug)]
+pub struct CsvLineParser<'lin, 'lim> {
+    line: &'lin String,
+    delim: &'lim String,
+}
+
+impl<'lin, 'lim> CsvLineParser<'lin, 'lim> {
+    pub fn new(line: &'lin String, delim: &'lim String) -> Self {
+        Self { line, delim }
+    }
+}
+
+impl<'lin, 'lim> Iterator for CsvLineParser<'lin, 'lim> {
+    type Item = Vec<String>;
+    fn next(&mut self) -> Option<Self::Item> {
+        todo!()
+    }
+}

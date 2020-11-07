@@ -2,20 +2,23 @@ mod csvreader;
 mod genlifetime;
 mod iterate_lifetime;
 
-use csvreader::CsvReader;
+use csvreader::{CsvLineParser, CsvReader};
 use genlifetime::*;
 use iterate_lifetime::*;
 
 // main entry point
 pub(crate) fn main() {
     let scores = vec![100, 189, 210, 209, 176];
-    let wins = vec![4, 3, 2, 1];
+    let wins: Vec<i32> = vec![4, 3, 2, 1];
+    println!("{:?}", "do stuff");
     println!(
         "highest score is {:?} max wins {:?}",
         largest(&scores),
         largest(&wins)
     );
 
+    let xpoint = Point { x: 1, y: 4 };
+    println!("{:?}", xpoint);
     let ipoint = Point { x: 1, y: 2 };
     let fpoint = Point { x: 1.3, y: 2.7 };
     println!("{:?} {:?}", ipoint, fpoint);
@@ -37,6 +40,13 @@ pub(crate) fn main() {
 
     let csv_reader = CsvReader::new(String::from(""));
     println!("{:?}", csv_reader);
+
+    let csv_string = String::from("");
+    let delim = String::from(",");
+    let csv_line_parser = CsvLineParser::new(&csv_string, &delim);
+    for (index, line) in csv_line_parser.enumerate() {
+        println!("{:?} {:?}", index, line);
+    }
 
     // for x in csv_reader {
     //     println!("{:?}", x);
