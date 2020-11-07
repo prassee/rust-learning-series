@@ -37,9 +37,10 @@ pub(crate) fn main() {
 
     let csv_reader = CsvReader::new(String::from(""));
     println!("{:?}", csv_reader);
-    for x in csv_reader {
-        println!("{:?}", x);
-    }
+
+    // for x in csv_reader {
+    //     println!("{:?}", x);
+    // }
 
     do_iterate();
 }
