@@ -52,7 +52,7 @@ mod tests {
         };
         for (index, score) in score_count.enumerate() {
             assert_eq!(scores_vec[index], *score);
-            println!("score are   {}", score);
+            println!("score are {}", score);
         }
     }
 
