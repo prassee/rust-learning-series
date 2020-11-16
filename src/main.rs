@@ -30,11 +30,10 @@ pub(crate) fn main() {
     bpost.summarize();
     bpost.def_func();
     let a = String::from("hello");
-    {
-        let b = String::from("byeeee");
-        let result = longest(&a, &b);
-        println!("{}", result);
-    }
+    let result: &str;
+    let b = String::from("byeeee");
+    result = longest(&a, &b);
+    println!("{}", result);
 
     parse_context(&genlifetime::Context(&String::from("echo")));
 
